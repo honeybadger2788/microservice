@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/catalog-service-parcial/catalog-service.iml" filepath="$PROJECT_DIR$/catalog-service-parcial/catalog-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/examen-esp-backend-carosella-noelia.iml" filepath="$PROJECT_DIR$/.idea/examen-esp-backend-carosella-noelia.iml" />
       <module fileurl="file://$PROJECT_DIR$/movie-service-parcial/movie-service.iml" filepath="$PROJECT_DIR$/movie-service-parcial/movie-service.iml" />
     </modules>
