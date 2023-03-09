@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
         <option value="$PROJECT_DIR$/api-movie/pom.xml" />
         <option value="$PROJECT_DIR$/api-catalog/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
       </list>
     </option>
   </component>
