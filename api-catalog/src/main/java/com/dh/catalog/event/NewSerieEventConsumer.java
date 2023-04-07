@@ -1,24 +1,25 @@
-package com.dh.catalog.client;
+package com.dh.catalog.event;
 
-import com.dh.catalog.config.LoadBalancerConfiguration;
+import com.dh.catalog.config.RabbitMQConfigSerie;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@FeignClient(name="api-serie")
-@LoadBalancerClient(value="api-serie", configuration= LoadBalancerConfiguration.class)
-public interface SerieServiceClient {
+@Component
+public class NewSerieEventConsumer {
 
-    @GetMapping("/api/v1/series/{genre}")
-    List<SerieServiceClient.SerieDto> getSerieByGenre(@PathVariable(value = "genre") String genre);
+    @RabbitListener(queues = RabbitMQConfigSerie.QUEUE_NEW_SERIE)
+    public void listen(NewSerieEventConsumer.SerieDto message){
+        System.out.print("NOMBRE DE SERIE "+ message.name);
+        //procesamiento
+    }
 
 
     @Getter
