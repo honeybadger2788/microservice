@@ -1,25 +1,28 @@
-package com.dh.catalog.client;
+package com.dh.serie.event;
 
-import com.dh.catalog.config.LoadBalancerConfiguration;
+import com.dh.serie.config.RabbitMQConfig;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@FeignClient(name="api-serie")
-@LoadBalancerClient(value="api-serie", configuration= LoadBalancerConfiguration.class)
-public interface SerieServiceClient {
+@Component
+public class NewSerieEventProducer {
+    private final RabbitTemplate rabbitTemplate;
 
-    @GetMapping("/api/v1/series/{genre}")
-    List<SerieServiceClient.SerieDto> getSerieByGenre(@PathVariable(value = "genre") String genre);
+    public NewSerieEventProducer(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
+
+    public void publishNewMovieEvent(SerieDto message){
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME,RabbitMQConfig.NEW_SERIE,message);
+    }
 
     @Getter
     @Setter
@@ -50,4 +53,5 @@ public interface SerieServiceClient {
 
         }
     }
+
 }
