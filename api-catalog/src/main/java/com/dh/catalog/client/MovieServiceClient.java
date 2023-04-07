@@ -1,7 +1,9 @@
 package com.dh.catalog.client;
 
 import com.dh.catalog.config.LoadBalancerConfiguration;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -20,8 +22,9 @@ public interface MovieServiceClient {
 
 	@Getter
 	@Setter
+	@AllArgsConstructor
+	@NoArgsConstructor
 	class MovieDto{
-		private Long id;
 
 		private String name;
 
