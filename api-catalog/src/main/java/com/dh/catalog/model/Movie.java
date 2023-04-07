@@ -8,20 +8,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 
-@Document(collection = "Series")
+@Document(collection = "Movies")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class Movie implements Serializable {
+public class Movie {
 
     @Id
-    private Long id;
+    private String id;
 
     private String name;
 
     private String genre;
 
     private String urlStream;
-
 }
