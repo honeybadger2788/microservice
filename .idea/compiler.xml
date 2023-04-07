@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -15,13 +16,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="api-catalog" target="17" />
-      <module name="api-movie" target="17" />
-      <module name="api-serie" target="17" />
       <module name="catalog-service" target="17" />
-      <module name="config-server" target="17" />
-      <module name="eureka-server" target="17" />
-      <module name="gateway" target="17" />
       <module name="movie-service" target="17" />
     </bytecodeTargetLevel>
   </component>
