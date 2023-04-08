@@ -26,6 +26,14 @@ public class CatalogController {
 		return ResponseEntity.ok(new CatalogResponse(genre,movies,series));
 	}
 
+	// Endpoint creado a los efectos de forzar la prueba offline
+	@GetMapping("/offline/{genre}")
+	ResponseEntity<?> getGenreOffline(@PathVariable String genre) throws Exception{
+		var series = catalogService.getSeriesOffline(genre);
+		var movies = catalogService.getMoviesOffline(genre);
+		return ResponseEntity.ok(new CatalogResponse(genre,movies,series));
+	}
+
 	@Setter
 	@Getter
 	@AllArgsConstructor

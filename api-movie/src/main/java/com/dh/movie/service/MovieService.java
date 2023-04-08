@@ -27,4 +27,8 @@ public class MovieService {
         newMovieEventProducer.publishNewMovieEvent(newMovie);
         return movieRepository.save(movie);
     }
+
+    public void delete(Long id) {
+        movieRepository.deleteById(id);
+    }
 }

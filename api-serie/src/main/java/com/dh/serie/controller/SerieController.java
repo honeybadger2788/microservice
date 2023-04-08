@@ -30,4 +30,10 @@ public class SerieController {
     public ResponseEntity<Serie> create(@RequestBody Serie serie) {
         return  ResponseEntity.ok().body(serieService.create(serie));
     }
+
+    @PostMapping("/delete")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void delete(@RequestBody String id) {
+        serieService.delete(id);
+    }
 }

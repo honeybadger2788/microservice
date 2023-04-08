@@ -4,6 +4,8 @@ import com.dh.serie.event.NewSerieEventProducer;
 import com.dh.serie.model.Serie;
 import com.dh.serie.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,5 +30,9 @@ public class SerieService {
         var newSerie = new NewSerieEventProducer.SerieDto(serie.getName(),serie.getGenre(),serie.getSeasons());
         newSerieEventProducer.publishNewMovieEvent(newSerie);
         return repository.save(serie);
+    }
+
+    public void delete(String id) {
+        repository.deleteById(id);
     }
 }

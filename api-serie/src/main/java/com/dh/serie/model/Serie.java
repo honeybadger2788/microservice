@@ -16,7 +16,8 @@ import java.util.UUID;
 @Setter
 @Getter
 public class Serie {
-
+    @Id
+    private String id;
     private String name;
     private String genre;
     private List<Season> seasons = new ArrayList<>();

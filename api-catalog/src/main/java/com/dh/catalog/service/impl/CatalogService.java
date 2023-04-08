@@ -36,11 +36,35 @@ public class CatalogService implements ICatalogService {
     @Autowired
     ObjectMapper mapper;
 
+
+
     @Retry(name = "movies")
     @CircuitBreaker(name = "movies", fallbackMethod = "getMoviesFallBack")
     @Override
     public List<MovieDto> getMovies(String genre) throws Exception {
         return movieServiceClient.getMovieByGenre(genre);
+    }
+
+    @Override
+    public List<SerieDto> getSeriesOffline(String genre) throws Exception {
+        List<Serie> series = serieRepository.findAllByGenre(genre);
+        List<SerieDto> seriesDto = new ArrayList<>();
+        for (Serie serie :
+                series) {
+            seriesDto.add(mapper.convertValue(serie, SerieDto.class));
+        }
+        return seriesDto;
+    }
+
+    @Override
+    public List<MovieDto> getMoviesOffline(String genre) throws Exception {
+        List<Movie> movies = movieRepository.findAllByGenre(genre);
+        List<MovieDto> moviesDto = new ArrayList<>();
+        for (Movie movie :
+                movies) {
+            moviesDto.add(mapper.convertValue(movie, MovieDto.class));
+        }
+        return moviesDto;
     }
 
     public List<MovieDto> getMoviesFallBack(String genre, Throwable ex) {

@@ -60,8 +60,8 @@ public class SerieApplication {
 					new Serie.Season(2, serieBSeasonBChapters)
 			);
 
-			Serie serieA = new Serie("Serie A", "Terror", serieASeasons);
-			Serie serieB = new Serie("Serie B", "Comedia", serieBSeasons);
+			Serie serieA = new Serie(UUID.randomUUID().toString(),"Serie A", "Terror", serieASeasons);
+			Serie serieB = new Serie(UUID.randomUUID().toString(),"Serie B", "Comedia", serieBSeasons);
 			repository.save(serieA);
 			repository.save(serieB);
 
