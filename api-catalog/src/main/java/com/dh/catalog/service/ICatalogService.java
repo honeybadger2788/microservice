@@ -1,7 +1,12 @@
 package com.dh.catalog.service;
 
-import com.dh.catalog.service.impl.CatalogService;
+import com.dh.catalog.dto.MovieDto;
+import com.dh.catalog.dto.SerieDto;
+
+import java.util.List;
 
 public interface ICatalogService {
-    CatalogService.Catalog getCatalog(String genre) throws Exception;
+    List<SerieDto> getSeries(String genre) throws Exception;
+
+    List<MovieDto> getMovies(String genre) throws Exception;
 }
