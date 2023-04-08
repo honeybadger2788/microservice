@@ -20,7 +20,7 @@ public class SerieService {
         return repository.findAll();
     }
 
-    public List<Serie> getSeriesBygGenre(String genre) {
+    public List<Serie> getSeriesByGenre(String genre) {
         return repository.findAllByGenre(genre);
     }
 

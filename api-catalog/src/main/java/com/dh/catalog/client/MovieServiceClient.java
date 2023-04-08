@@ -1,10 +1,7 @@
 package com.dh.catalog.client;
 
 import com.dh.catalog.config.LoadBalancerConfiguration;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.dh.catalog.dto.MovieDto;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,19 +15,4 @@ public interface MovieServiceClient {
 
 	@GetMapping("/api/v1/movies/{genre}")
 	List<MovieDto> getMovieByGenre(@PathVariable (value = "genre") String genre);
-
-
-	@Getter
-	@Setter
-	@AllArgsConstructor
-	@NoArgsConstructor
-	class MovieDto{
-
-		private String name;
-
-		private String genre;
-
-		private String urlStream;
-	}
-
 }

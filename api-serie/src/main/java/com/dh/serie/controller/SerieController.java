@@ -23,7 +23,7 @@ public class SerieController {
 
     @GetMapping("/{genre}")
     public List<Serie> getSerieByGenre(@PathVariable String genre) {
-        return serieService.getSeriesBygGenre(genre);
+        return serieService.getSeriesByGenre(genre);
     }
 
     @PostMapping("/save")
