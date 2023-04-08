@@ -1,7 +1,9 @@
 package com.dh.movie.controller;
 
+import com.dh.movie.event.NewMovieEventProducer;
 import com.dh.movie.model.Movie;
 import com.dh.movie.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,12 +13,9 @@ import java.util.List;
 @RequestMapping("/api/v1/movies")
 public class MovieController {
 
+    @Autowired
+    MovieService movieService;
 
-    private final MovieService movieService;
-
-    public MovieController(MovieService movieService) {
-        this.movieService = movieService;
-    }
 
     @GetMapping("/{genre}")
     ResponseEntity<List<Movie>> getMovieByGenre(@PathVariable String genre) {

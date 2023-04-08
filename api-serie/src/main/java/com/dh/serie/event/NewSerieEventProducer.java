@@ -1,6 +1,7 @@
 package com.dh.serie.event;
 
 import com.dh.serie.config.RabbitMQConfig;
+import com.dh.serie.model.Serie;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,10 +29,11 @@ public class NewSerieEventProducer {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
+    public static
     class SerieDto{
         private String name;
         private String genre;
-        private List<Season> seasons = new ArrayList<>();
+        private List<Serie.Season> seasons = new ArrayList<>();
 
         @Setter
         @Getter

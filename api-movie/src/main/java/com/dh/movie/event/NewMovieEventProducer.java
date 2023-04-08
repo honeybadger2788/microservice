@@ -25,9 +25,7 @@ public class NewMovieEventProducer {
     @NoArgsConstructor
     @Getter
     @Setter
-    class MovieDto{
-        private Long id;
-
+    public static class MovieDto{
         private String name;
 
         private String genre;

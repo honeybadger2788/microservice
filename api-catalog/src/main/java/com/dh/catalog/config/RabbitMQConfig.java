@@ -1,19 +1,22 @@
 package com.dh.catalog.config;
 
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMQConfigMovie {
+public class RabbitMQConfig {
 
-    public static final String EXCHANGE_NAME = "backendExchange";;
+    public static final String EXCHANGE_NAME = "backendExchange";
+    public static final String TOPIC_NEW_SERIE = "New serie";
+    public static final String QUEUE_NEW_SERIE ="queueNewSerie";
+
     public static final String TOPIC_NEW_MOVIE = "New movie";
     public static final String QUEUE_NEW_MOVIE ="queueNewMovie";
 
@@ -23,15 +26,24 @@ public class RabbitMQConfigMovie {
     }
 
     @Bean
+    public Queue queueNewSerie(){
+        return new Queue(QUEUE_NEW_SERIE);
+    }
+
+    @Bean
     public Queue queueNewMovie(){
         return new Queue(QUEUE_NEW_MOVIE);
     }
 
     @Bean
-    public Binding declareBindingSpecific(){
-        return BindingBuilder.bind(queueNewMovie()).to(appExchange()).with(TOPIC_NEW_MOVIE);
+    public Binding declareBindingSerie(){
+        return BindingBuilder.bind(queueNewSerie()).to(appExchange()).with(TOPIC_NEW_SERIE);
     }
 
+    @Bean
+    public Binding declareBindingMovie(){
+        return BindingBuilder.bind(queueNewMovie()).to(appExchange()).with(TOPIC_NEW_MOVIE);
+    }
 
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {

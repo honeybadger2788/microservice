@@ -13,7 +13,7 @@ public class CatalogController {
 	CatalogService catalogService;
 
 	@GetMapping("/{genre}")
-	ResponseEntity<?> getGenre(@PathVariable String genre) {
+	ResponseEntity<?> getGenre(@PathVariable String genre) throws Exception{
 		return ResponseEntity.ok(catalogService.getCatalog(genre));
 	}
 

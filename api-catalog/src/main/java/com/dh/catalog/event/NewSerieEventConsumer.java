@@ -1,6 +1,8 @@
 package com.dh.catalog.event;
 
-import com.dh.catalog.config.RabbitMQConfigSerie;
+import com.dh.catalog.client.SerieServiceClient;
+import com.dh.catalog.config.RabbitMQConfig;
+import com.dh.catalog.repository.SerieRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +17,14 @@ import java.util.List;
 @Component
 public class NewSerieEventConsumer {
 
-    @RabbitListener(queues = RabbitMQConfigSerie.QUEUE_NEW_SERIE)
+    @Autowired
+    SerieRepository serieRepository;
+
+    @RabbitListener(queues = RabbitMQConfig.QUEUE_NEW_SERIE)
     public void listen(NewSerieEventConsumer.SerieDto message){
         System.out.print("NOMBRE DE SERIE "+ message.name);
-        //procesamiento
+        var newSerie = new SerieServiceClient.SerieDto(message.name,message.genre,message.seasons);
+        serieRepository.save(newSerie);
     }
 
 
@@ -29,7 +35,7 @@ public class NewSerieEventConsumer {
     class SerieDto{
         private String name;
         private String genre;
-        private List<Season> seasons = new ArrayList<>();
+        private List<SerieServiceClient.SerieDto.Season> seasons = new ArrayList<>();
 
         @Setter
         @Getter

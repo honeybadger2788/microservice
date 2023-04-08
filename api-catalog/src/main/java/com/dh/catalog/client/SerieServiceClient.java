@@ -41,6 +41,8 @@ public interface SerieServiceClient {
 
             @Setter
             @Getter
+            @AllArgsConstructor
+            @NoArgsConstructor
             public static class Chapter {
 
                 private String name;

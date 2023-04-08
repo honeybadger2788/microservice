@@ -1,7 +1,9 @@
 package com.dh.serie.service;
 
+import com.dh.serie.event.NewSerieEventProducer;
 import com.dh.serie.model.Serie;
 import com.dh.serie.repository.SerieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,12 +11,10 @@ import java.util.List;
 @Service
 public class SerieService {
 
-    private final SerieRepository repository;
-
-
-    public SerieService(SerieRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    SerieRepository repository;
+    @Autowired
+    NewSerieEventProducer newSerieEventProducer;
 
     public List<Serie> getAll() {
         return repository.findAll();
@@ -24,8 +24,9 @@ public class SerieService {
         return repository.findAllByGenre(genre);
     }
 
-    public String create(Serie serie) {
-        repository.save(serie);
-        return serie.getId();
+    public Serie create(Serie serie) {
+        var newSerie = new NewSerieEventProducer.SerieDto(serie.getName(),serie.getGenre(),serie.getSeasons());
+        newSerieEventProducer.publishNewMovieEvent(newSerie);
+        return repository.save(serie);
     }
 }
